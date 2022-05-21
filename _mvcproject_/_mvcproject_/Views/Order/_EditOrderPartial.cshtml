@@ -1,0 +1,39 @@
+﻿@model _mvcproject_.Models.Order
+
+<div class="modal fade" id="EditOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Rate the service</h5> 
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form asp-action="Edit" asp-route-id="@Model.Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+               <input asp-for="Id" class ="form-control" value="@Model.Id" hidden /> 
+                <input asp-for="Client_Id" class ="form-control" value="@Model.Client_Id" hidden /> 
+                <input asp-for="Provider_Id" class ="form-control" value="@Model.Provider_Id" hidden />
+                <input asp-for="Message" class ="form-control" value="@Model.Message" hidden /> 
+                <input asp-for="price" class ="form-control" value="@Model.price" hidden />
+            
+            <div class="form-group">
+                <label asp-for="Rating" class="control-label"></label>
+                <input asp-for="Rating" class="form-control" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Complaint" class="control-label"></label>
+                <input asp-for="Complaint" class="form-control" />
+                <span asp-validation-for="Complaint" class="text-danger"></span>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-primary" data-save="modal">Submit</button> 
+
+      </div>
+    </div>
+  </div>
+</div>

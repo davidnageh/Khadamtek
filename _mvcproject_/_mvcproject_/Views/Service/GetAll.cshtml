@@ -1,0 +1,29 @@
+﻿@model IEnumerable<_mvcproject_.Models.Service>
+
+@{
+    ViewData["Title"] = "Services";
+}
+
+<div class="row">
+
+		@foreach(var item in Model)
+		{
+			<div class="col-sm-12 col-md-4 col-lg-4">
+				<div id="container">		
+					<div class="product-details">
+						<h1>@item.Service_Name</h1>
+						<div class="control">
+							 <a class="btn btn-primary" asp-action="getbyserviceid" asp-controller="provider" asp-route-id="@item.Service_Id">Explore</a>
+						</div>			
+					</div>	
+					<div class="product-image">
+						<img src="~/servicelogos/@item.ImgPath" alt="Service Photo">
+					</div>
+				</div>
+			</div>
+		}	
+		</div>
+
+
+
+

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<_mvcproject_.Models.Order>
+
+@{
+    ViewData["Title"] = "GetByClientId";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+             <th>
+               Provider
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Provider.PhoneNumber)
+            </th>
+              <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>    
+            <th >
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Complaint)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAccepted)
+            </th>               
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Provider.FirstName @item.Provider.LastName
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Provider.PhoneNumber)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td  >
+            <span class="hint-star star">
+		        <i class="fa  fa-star-o" aria-hidden="true"></i>
+		        <i class="fa  fa-star-o" aria-hidden="true"></i>
+		        <i class="fa  fa-star-o" aria-hidden="true"></i>
+		        <i class="fa fa-star-o" aria-hidden="true"></i>
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+	        </span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Complaint)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAccepted)
+            </td>
+            <td>  
+           <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+           <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

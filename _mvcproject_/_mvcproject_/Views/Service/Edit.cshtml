@@ -1,0 +1,54 @@
+﻿@model _mvcproject_.Models.Service
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}*@
+
+
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <h5 class="card-header">Edit Service</h5>
+                    <form asp-action="Edit">
+                        <div class="card-body">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="Service_Id" value="@Model.Service_Id" />
+                            <div>
+                                <label asp-for="Service_Name" class="form-label">Name</label>
+                                <input type="text" class="form-control" asp-for="Service_Name"  value="@Model.Service_Name"/>
+                                <span asp-validation-for="Service_Name" class="text-danger"></span>
+
+
+                            </div>
+
+                            <div>
+                                <label asp-for="ImgPath" class="control-label"></label>
+                                <input asp-for="ImgPath" class="form-control" value="@Model.ImgPath" />
+                                <span asp-validation-for="ImgPath" class="text-danger"></span>
+
+
+                            </div>
+
+                            <div style="margin-top:10px;">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

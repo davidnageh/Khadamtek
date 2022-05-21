@@ -1,0 +1,70 @@
+﻿@model IEnumerable<_mvcproject_.Models.Order>
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layoutprovider.cshtml";
+    //ApplicationUser provider = Model?.FirstOrDefault().Provider;
+
+}
+
+<!--------------------------------------------------------------------->
+<style>
+    .checked {
+        color: orange;
+    }
+</style>
+<div class="row py-5 px-4">
+    <div class="col-md-10 mx-auto">
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            
+
+                    <div class="py-4 px-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                <h5 class="mb-0">Your Orders</h5>
+                </div>
+
+                <table class="table table-bordered table-light">
+                <thead>
+                <tr>
+                <th scope="col"> User</th>
+                <th scope="col">Message</th>
+                <th scope="col">Price</th>
+                <th scope="col">PhoneNumber</th>
+                
+                <th scope="col">Rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+
+                <th scope="row">@item.User.FirstName @item.User.LastName</th>
+                <td>@item.Message</td>
+                <td>@item.price</td>
+                <td>@item.User.PhoneNumber</td>
+            <td>
+                                    <span class="hint-star star">
+                                        @for (int i = 0; i < item.Rating; i++)
+                                        {
+                                            <span class="fa fa-star checked"></span>
+                                        }
+
+                                        @for (int i = 0; i < 5 - item.Rating; i++)
+                                        {
+                                            <span class="fa  fa-star-o"></span>
+                                        }
+                                    </span>
+                                </td>
+                </tr>
+                }
+
+                </tbody>
+                </table>
+
+
+                </div>
+        </div>
+    </div>
+</div>
+

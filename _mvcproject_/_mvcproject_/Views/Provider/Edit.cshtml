@@ -1,0 +1,78 @@
+﻿@model ApplicationUser
+@{
+    ViewData["Title"] = "Edit";
+       Layout = "~/Views/Shared/FormLR.cshtml";
+}
+
+
+<div class="formbg-outer">
+    <div class="formbg">
+        <div class="formbg-inner padding-horizontal--48">
+            <span class="padding-bottom--15">Update Your Data</span>
+            <form id="stripe-login"  asp-action="Edit" asp-route-id="@Model.Id" >
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="field padding-bottom--24">
+                      <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" value="@Model.FirstName" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                </div>
+
+                <div class="field padding-bottom--24">
+                 <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" value="@Model.LastName"/>
+                <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+
+                   <div class="field padding-bottom--24">
+             <label asp-for="Gender" class="control-label"></label>
+                <select value="@Model.Gender" asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control" ></select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+
+                 <div class="field padding-bottom--24">
+           <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" value="@Model.PhoneNumber" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+
+                 <div class="field padding-bottom--24">
+                   <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" value="@Model.Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+
+
+             <div class="field padding-bottom--24">
+                <label asp-for="PriceStart" class="control-label"></label>
+                <input asp-for="PriceStart" class="form-control" value="@Model.PriceStart" />
+                <span asp-validation-for="PriceStart" class="text-danger"></span>
+            </div>
+
+       <div class="field padding-bottom--24">
+                <label asp-for="PriceEnd" class="control-label"></label>
+                <input asp-for="PriceEnd" class="form-control" value="@Model.PriceEnd" />
+                <span asp-validation-for="PriceEnd" class="text-danger"></span>
+            </div> 
+
+
+
+
+                <div class="field padding-bottom--24">
+                    <input type="submit" name="submit" value="Update">
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

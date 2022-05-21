@@ -1,0 +1,52 @@
+﻿@model _mvcproject_.ViewModels.ServiceCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@*@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@
+
+
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <h5 class="card-header">Add Service</h5>
+                    <form enctype="multipart/form-data" asp-action="Create">
+                        <div class="card-body">
+                            <div>
+                                <label asp-for="Service_Name" class="form-label">Name</label>
+                                <input type="text" class="form-control" asp-for="Service_Name" />
+                                <span asp-validation-for="Service_Name" class="text-danger"></span>
+
+
+                            </div>
+
+                            <div>
+                                <label asp-for="Image" class="control-label"></label>
+                                 <input asp-for="Image" class="form-control custom-file-input" />
+                                <span asp-validation-for="Image" class="text-danger"></span>
+
+                            </div>
+
+                            <div style="margin-top:10px;">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

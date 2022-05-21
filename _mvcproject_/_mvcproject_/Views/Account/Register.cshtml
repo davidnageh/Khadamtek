@@ -1,0 +1,144 @@
+﻿@model _mvcproject_.Models.ProviderRegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/FormLR.cshtml";
+
+}
+
+<style>
+    #map {
+        height: 300px;
+        width: 300px;
+        margin: auto;
+    }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<div class="formbg-outer">
+    <div class="formbg">
+        <div class="formbg-inner padding-horizontal--48">
+            <span class="padding-bottom--15">Sign in to your account</span>
+            <form id="stripe-login" enctype="multipart/form-data" asp-action="Register">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="field padding-bottom--24">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                </div>
+
+                <div class="field padding-bottom--24">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+
+                <div class="field padding-bottom--24">
+                    <label asp-for="Gender" class="control-label"></label>
+                    <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control"></select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+
+                <div class="field padding-bottom--24">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="field padding-bottom--24">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+
+                <div class="field padding-bottom--24">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="field padding-bottom--24">
+                    <label asp-for="profile" class="control-label">Profile Photo</label>
+                    <input asp-for="profile" class="form-control custom-file-input" />
+                </div>
+
+                <div id="map">
+                    <script>
+                         let map;
+                        function initMap() {
+                            const myLatlng = { lat: 30.044420, lng: 31.235712 };
+                           map = new google.maps.Map(document.getElementById("map"), {
+                              center: myLatlng,
+                              zoom: 8,
+                           });
+
+                          let infoWindow = new google.maps.InfoWindow({
+                          content: "Click the map to get Lat/Lng!",
+                          position: myLatlng,
+                          });
+                          infoWindow.open(map);
+                          // Configure the click listener.
+                          var marker = null;
+                          map.addListener("click", (mapsMouseEvent) => {
+
+                              if(marker!=null){marker.setMap(null);}
+                              infoWindow.close();
+
+                               marker = new google.maps.Marker({
+                                   position: mapsMouseEvent.latLng,
+                                   map: map
+                                });
+                                map.setCenter(mapsMouseEvent.latLng);
+                              document.getElementById("LatTxt").value = mapsMouseEvent.latLng.lat();
+                              document.getElementById("LanTxt").value = mapsMouseEvent.latLng.lng();
+
+                          });
+
+
+                        }
+                    </script>
+                    <script async
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD873IXfahZxYl96yuqmyzJelQYNiQ2UXQ&callback=initMap">
+                    </script>
+
+
+
+                </div>
+
+                <div class="custom-file">
+                    <input id="LatTxt" type="hidden" asp-for="latitude" class="form-control" />
+                </div>
+                <div class="custom-file">
+                    <input id="LanTxt" type="hidden" asp-for="longitude" class="form-control" />
+                </div>
+
+                <div class="field padding-bottom--24">
+                    <input type="submit" name="submit" value="Register">
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="footer-link padding-top--24">
+        <span>Don't have an account? <a asp-action="register">Sign up</a></span>
+
+    </div>
+
+</div>
+
+
+
+
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

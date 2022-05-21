@@ -1,0 +1,130 @@
+﻿@model List<ApplicationUser>
+@{
+ViewData["Title"] = "GetBySerciceId";
+Layout = "~/Views/Shared/_Layoutprovider.cshtml";
+var Cuser = ViewBag.ClientUser;
+}
+<style>
+#map {
+height: 600px;
+width:70%;
+margin:30px auto;
+}
+html, body {
+height: 100%;
+margin: 0;
+padding: 0;
+}
+</style>
+
+
+
+<div class="row">
+<h3 class="ltext-103 cl5 text-center mt-4">
+Providers
+</h3>
+@foreach (var item in Model)
+{
+<div class="col-sm-12 col-md-4">
+<div id="container">
+<!-- Start Product details -->
+<div class="product-details">
+<!-- Product Name -->
+<h1>@item.FirstName @item.LastName</h1>
+
+<p class="information"></p>
+
+<div class="control">
+
+<div id="placeholder"></div>
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createOrder" data-url=@Url.Action("Create" , "Order", new { id = @item.Id})>
+<span class="buy">Connect</span>
+</button>
+
+
+<a type="submit" class="btn" style="margin-top:20px;" asp-controller="Provider" asp-action="Details" asp-route-id="@item.Id">Details </a>
+		
+</div>
+
+</div>
+
+<div class="product-image">
+
+						<img src="~/images/pro.jpg" alt="Service Photo">
+					
+<div class="info">
+<h2>Information</h2>
+<ul>
+<li><strong>Name : </strong>@item.FirstName @item.LastName</li>
+<li><strong>Gender : </strong>@item.Gender</li>
+<li><strong>Email: </strong>@item.Email</li>
+<li><strong>Mobile : </strong>@item.PhoneNumber</li>
+<li><strong>Service: </strong>@item.Service.Service_Name</li>
+<li><strong>Price Range: </strong>@item.PriceStart - @item.PriceEnd</li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+}
+
+
+
+</div>
+<div style="margin:auto;">
+<input style="display:block; margin:auto;" class="btn btn-lg btn-primary" type="button" name="answer" value="Location Of Providers On Map" onclick="showDiv()" />
+</div>
+<div id="map" style="display:none;">
+<script>
+let map;
+function initMap() {
+var CUsr = @Html.Raw(Json.Serialize(@Cuser));
+console.log(CUsr);
+map = new google.maps.Map(document.getElementById("map"), {
+// center: { lat: C., lng: 31.235712 },
+center: { lat: CUsr.latitude, lng: CUsr.longitude },
+zoom: 8,
+});
+var UserLocation = new google.maps.Marker({
+position:{ lat: CUsr.latitude, lng: CUsr.longitude},
+map: map,
+});
+UserLocation.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
+
+}
+function showDiv() {
+document.getElementById('map').style.display = "block";
+var marker=[];
+var lang;
+var lati;
+var data = @Html.Raw(Json.Serialize(@Model));
+//var ProfessionIcon;
+// if(data.Service_Id==1)
+// {
+// ProfessionIcon = 'icons/Fix-Tech.jpg'
+// }
+
+for(var i=0;i< data.length;i++)
+{
+
+lati=data[i].latitude;
+
+lang= data[i].longitude;
+
+marker[i] = new google.maps.Marker({
+position:{ lat: lati, lng: lang},
+map: map,
+});
+//marker[i].setIcon(ProfessionIcon);
+// marker[i].setIcon('./icons/Fix-Tech.jpg')
+}
+}
+</script>
+<script async
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD873IXfahZxYl96yuqmyzJelQYNiQ2UXQ&callback=initMap">
+</script>
+<img src="icons/Carpentr.jpg" width="500" height="600"/>
+</div>

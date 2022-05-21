@@ -1,0 +1,66 @@
+﻿@model IEnumerable<_mvcproject_.Models.Service>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+
+        <div class="card">
+            <h5 class="card-header">Service</h5>
+            <div class="card-body">
+                <div class="table-responsive text-nowrap">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th> @Html.DisplayNameFor(model => model.Service_Name)</th>
+                                <th>  @Html.DisplayNameFor(model => model.ImgPath)</th>
+
+                                <th> Statue</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+
+                            @foreach (var item in Model)
+                            {
+
+
+
+                                <tr>
+                                    <td>
+                                        <i class="fab fa-angular fa-lg text-danger me-3"></i> <strong> @Html.DisplayFor(modelItem => item.Service_Name) </strong>
+                                    </td>
+
+                                    <td>
+
+                                        <img src="~/servicelogos/@Html.DisplayFor(modelItem => item.ImgPath)" alt="Avatar" class="rounded-circle" width="100px" />
+
+
+                                    </td>
+                                    <td><span class="badge bg-label-primary me-1">Active</span></td>
+                                    <td>
+
+                                                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Service_Id"><i class="bx bx-edit-alt me-1"></i>Edit</a>
+
+                                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Service_Id"><i class="bx bx-trash me-1"></i> Delete</a>
+
+
+       
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

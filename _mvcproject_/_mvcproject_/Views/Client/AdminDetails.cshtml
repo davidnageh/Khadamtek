@@ -1,0 +1,93 @@
+﻿@model IEnumerable<_mvcproject_.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mod = Model.First();
+}
+   <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+   <div class="row">
+
+                <!-- Inline text elements -->
+                <div class="col-8">
+                  <div class="card mb-4">
+                    <h5 class="card-header">Client</h5>
+                    <div class="card-body">
+                      <table class="table ">
+                        <tbody>
+                          <tr>
+                            <td class="align-middle"><small class="text-dark fw-semibold"> @Html.DisplayNameFor(model => model.FirstName)</small></td>
+                            <td class="py-3">
+                              <p class="mb-0">@Html.DisplayFor(modelItem => mod.FirstName)</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="align-middle"><small class="text-dark fw-semibold"> @Html.DisplayNameFor(model => model.LastName)</small></td>
+                            <td class="py-3">
+                              <p class="mb-0">@Html.DisplayFor(modelItem => mod.LastName)</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><small class="text-dark fw-semibold"> @Html.DisplayNameFor(model => model.Gender)</small></td>
+                            <td class="py-3">
+                              <p class="mb-0">@Html.DisplayFor(modelItem => mod.Gender)</p>
+                            </td>
+                          </tr>
+                         
+                          <tr>
+                            <td><small class="text-dark fw-semibold"> @Html.DisplayNameFor(model => model.PhoneNumber)</small></td>
+                            <td class="py-3">
+                              <p class="mb-0">@Html.DisplayFor(modelItem => mod.PhoneNumber)</p>
+                            </td>
+                          </tr>
+                       
+                          <tr>
+                            <td><small class="text-dark fw-semibold"> @Html.DisplayNameFor(model => model.UserName)</small></td>
+                            <td class="py-3">
+                              <p class="mb-0">@Html.DisplayFor(modelItem => mod.UserName)</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><small class="text-dark fw-semibold"> @Html.DisplayNameFor(model => model.Email)</small></td>
+                            <td class="py-3">
+                              <p class="mb-0">@Html.DisplayFor(modelItem => mod.Email)</p>
+                            </td>
+                          </tr>
+                       @*   <tr>
+                            <td><small class="text-light fw-semibold"> @Html.DisplayNameFor(model => model.FirstName)</small></td>
+                            <td>
+                              <p><abbr title="attribute">attr</abbr></p>
+                              <p class="mb-0"><abbr title="HyperText Markup Language" class="initialism">HTML</abbr></p>
+                            </td>
+                          </tr>*@
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                  <div class="col-md-6 col-lg-4 mb-3">
+                  <div class="card h-70">
+                    <div class="card-body">
+                      <h5 class="card-title">Profile Photo</h5>
+
+                        @if (mod.ProfilePhoto != null)
+                        {
+                            <img class="img-fluid" src="~/Images/@Html.DisplayFor(modelItem => mod.ProfilePhoto)" alt="Card image cap" />
+                        }
+                    </div>
+                  
+                  </div>
+                </div>
+
+         
+
+              </div>
+
+              </div>
+              </div>

@@ -1,0 +1,92 @@
+﻿@model _mvcproject_.Models.ClientLoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/FormLR.cshtml";
+}
+
+<div class="formbg-outer">
+    <div class="formbg">
+        <div class="formbg-inner padding-horizontal--48">
+            <span class="padding-bottom--15">Sign in to your account</span>
+            <form id="stripe-login" asp-action="Login">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="field padding-bottom--24">
+                    <label asp-for="UserName"></label>
+                    <input asp-for="UserName">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+
+                </div>
+
+                <div class="field padding-bottom--24">
+                    <label asp-for="password"></label>
+                    <input asp-for="password">
+
+                    <span asp-validation-for="password" class="text-danger"></span>
+
+                </div>
+
+
+
+
+
+
+
+                    <div class="field padding-bottom--24">
+                    <input type="submit" name="submit" value="Login">
+                </div>
+
+            </form>
+
+            @{
+                if (Model.ExternalLogins.Count == 0)
+                {
+                    <div>No External Logins configured</div>
+                }
+                else
+                {
+                    <div class="field padding-bottom--24">
+
+                   <span class="padding-bottom--15" >Or login with</span>
+                    </div>
+                    <form method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+                        <div style="text-align : center ;">
+                          
+                            @foreach (var provider in Model.ExternalLogins)
+                            {
+                               if (provider.DisplayName == "Facebook")
+                                {
+                                    <button width="200px"  type="submit" name="provider" value="@provider.Name"
+                                title="Login using your @provider.DisplayName" class="btn btn-primary ">
+                                <i class="fa-brands fa-facebook" style="color : white;"></i>
+                                    Facebook
+                                    </button>
+                                }
+                                else if (provider.DisplayName == "Google")
+                                {
+                                    <button type="submit"  name="provider" value="@provider.Name"
+                                title="Login using your @provider.DisplayName"class="btn btn-danger ">
+                                <i class="fa-brands fa-google" style="color : white;"></i>
+                                     Google
+                                    </button>
+                                }
+
+                            }
+                        </div>
+                    </form>
+                }
+            }
+        </div>
+    </div>
+    <div class="footer-link padding-top--24">
+        <span>Don't have an account? <a asp-action="register">Sign up</a></span>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
